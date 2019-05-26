@@ -2,5 +2,6 @@
     <string name="app_name">Apache_Log_Parser</string>
     <string name="title">Apache Log Parser - MSimunac</string>
     <string name="sequence">Sequence</string>
-    <string name="occurrences">Occurrences</string>
+    <string name="occurrences">#</string>
+    <string name="xxx">XXX</string>
 </resources>

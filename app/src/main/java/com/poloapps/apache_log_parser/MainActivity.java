@@ -1,12 +1,12 @@
 package com.poloapps.apache_log_parser;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,11 +23,17 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "InspAppsCD";
+    //private static final String TAG = "InspAppsCD";
+    ArrayList<HashMap<String, String>> seqList;
+    ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.show();
 
         // get Access Log info in a new thread
         new Thread(new Runnable() {
@@ -88,13 +94,30 @@ public class MainActivity extends AppCompatActivity {
                     //Log.i(TAG, (AccessList.get(i).toString()));
                 }
                 Map<String, Integer> sortedMap = sortByValue(seqMap);
+                seqList = new ArrayList<>();
+                final ListView lv = findViewById(R.id.alp_listView);
 
                 for (Map.Entry<String,Integer> entry : sortedMap.entrySet()) {
                     String key = entry.getKey();
                     Integer value = entry.getValue();
-                    Log.i(TAG, key + " " + value);
+
+                    HashMap<String, String> item = new HashMap<>();
+                    item.put("key", key);
+                    item.put("value", Integer.toString(value));
+                    seqList.add(item);
+                    //Log.i(TAG, key + " " + value);
                 }
-                Log.i(TAG, Integer.toString(AccessList.size()));
+                String[] from = {"key","value"};
+                int[] to = {R.id.seq_string, R.id.seq_value};
+                final ListAdapter listAdapter = new SimpleAdapter(getApplicationContext(), seqList,
+                        R.layout.apl_list_item, from, to) {};
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        lv.setAdapter(listAdapter);
+                        dialog.dismiss();
+                    }
+                });
 
             }
         }).start();

@@ -13,39 +13,37 @@
         android:textColor="@android:color/holo_blue_light"
         android:text="@string/title"
         android:gravity="center_horizontal"
-        android:textSize="20sp"
-        android:layout_marginBottom="25dp" />
+        android:textSize="17sp"
+        android:layout_marginBottom="5dp" />
 
-    <TableLayout
-        android:id="@+id/alp_tableLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/dark_gray"
-        android:layout_gravity="center">
-
-        <TableRow
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_gray">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            tools:ignore="UselessParent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="50dp"
-                android:textSize="20sp"
-                android:text="@string/sequence"
-                android:textColor="@android:color/white" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:layout_marginStart="110dp"
-                android:textSize="20sp"
-                android:text="@string/occurrences"
-                android:textColor="@android:color/white" />
-        </TableRow>
-    </TableLayout>
+            android:layout_marginBottom="8dp"
+            android:textSize="20sp"
+            android:text="@string/sequence"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/occurrences"
+            android:layout_alignParentEnd="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/alp_listView"
+        android:background="@color/dark_gray"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarThumbVertical="@android:color/holo_purple"
+        android:fadeScrollbars="true"/>
+
 </LinearLayout>
